@@ -241,7 +241,7 @@
   <?= $this->Html->script('/dashboard/vendor/jquery/jquery.min'); ?>  
   <?= $this->Html->script('/dashboard/vendor/popper/popper.min'); ?>  
   <?= $this->Html->script('/dashboard/vendor/bootstrap/bootstrap.min'); ?>  
-  <?= $this->Html->script('/dashboardo/vendor/headroom/headroom.min'); ?>  
+  <?= $this->Html->script('/dashboard/vendor/headroom/headroom.min'); ?>  
   <!-- Optional JS -->
   <?= $this->Html->script('/dashboard/vendor/onscreen/onscreen.min'); ?>  
   <?= $this->Html->script('/dashboard/vendor/nouislider/js/nouislider.min'); ?>  

@@ -16894,7 +16894,7 @@ textarea[resize="horizontal"] {
 }
 
 .navbar-vertical .navbar-nav .nav-link.active:before {
-  content: '';
+  content: ' ';
   position: absolute;
   left: 0;
   top: 0.25rem;
@@ -17352,7 +17352,7 @@ textarea[resize="horizontal"] {
     bottom: 0.25rem;
     left: 0;
     right: auto;
-    border-left: 2px solid #5e72e4;
+    border-left: 20px solid #5e72e4;
     border-bottom: 0;
   }
 

@@ -94,8 +94,9 @@
           </div>
         </form>
         <!-- Navigation -->
+        <h2 class="text-muted">MY LIST</h2>
         <ul class="navbar-nav">
-          <li class="nav-item  class=" active" ">
+          <li class="nav-item">
           <a class=" nav-link active " href=" ./index.html"> <i class="ni ni-tv-2 text-primary"></i> Dashboard
             </a>
           </li>
