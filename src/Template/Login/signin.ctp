@@ -13,8 +13,7 @@
                   <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                    </div>
-                    <input class="form-control" placeholder="Email" type="email">
+                    </div><?php echo $this->Form->email('', ['class' => 'form-control','placeholder' => 'Email']); ?>
                   </div>
                 </div>
                 <div class="form-group">
@@ -22,7 +21,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Password" type="password">
+                    <?php echo $this->Form->password('', ['class' => 'form-control','placeholder' => 'Password']); ?>
                   </div>
                 </div>
                 <div class="custom-control custom-control-alternative custom-checkbox">
@@ -32,7 +31,7 @@
                   </label>
                 </div>
                 <div class="text-center">
-                  <button type="button" class="btn btn-primary my-4">Sign in</button>
+                  <button type="button" class="btn btn-primary my-4" required>Sign in</button>
                 </div>
               </form>
             </div>

@@ -16891,6 +16891,7 @@ textarea[resize="horizontal"] {
 
 .navbar-vertical .navbar-nav .nav-link.active {
   position: relative;
+  background: #e7e7e769;
 }
 
 .navbar-vertical .navbar-nav .nav-link.active:before {
@@ -16899,7 +16900,7 @@ textarea[resize="horizontal"] {
   left: 0;
   top: 0.25rem;
   bottom: 0.25rem;
-  border-left: 2px solid #5e72e4;
+  border-left: 7px solid #5e72e4;
 }
 
 .navbar-vertical .navbar-nav .nav-link>i {
@@ -17023,7 +17024,7 @@ textarea[resize="horizontal"] {
   bottom: 0.25rem;
   left: 0;
   right: auto;
-  border-left: 2px solid #5e72e4;
+  border-left: 7px solid #5e72e4;
   border-bottom: 0;
 }
 
@@ -17132,7 +17133,7 @@ textarea[resize="horizontal"] {
     bottom: 0.25rem;
     left: 0;
     right: auto;
-    border-left: 2px solid #5e72e4;
+    border-left: 20px solid #5e72e4;
     border-bottom: 0;
   }
 
@@ -17242,7 +17243,7 @@ textarea[resize="horizontal"] {
     bottom: 0.25rem;
     left: 0;
     right: auto;
-    border-left: 2px solid #5e72e4;
+    border-left: 7px solid #5e72e4;
     border-bottom: 0;
   }
 
@@ -17352,7 +17353,7 @@ textarea[resize="horizontal"] {
     bottom: 0.25rem;
     left: 0;
     right: auto;
-    border-left: 20px solid #5e72e4;
+    border-left: 7px solid #5e72e4;
     border-bottom: 0;
   }
 
@@ -17462,7 +17463,7 @@ textarea[resize="horizontal"] {
     bottom: 0.25rem;
     left: 0;
     right: auto;
-    border-left: 2px solid #5e72e4;
+    border-left: 7px solid #5e72e4;
     border-bottom: 0;
   }
 
