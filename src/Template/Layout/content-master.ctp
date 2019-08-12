@@ -94,28 +94,27 @@
           </div>
         </form>
         <!-- Navigation -->
-        <h2 class="text-muted"> MY LIST</h2>
+        <h2 class="text"> MY LIST</h2>
         <ul class="navbar-nav">
           <li class="nav-item">
-          <a class=" nav-link active " href=" ./index.html"> 
-            <i class="ni ni-tv-2 text-primary"></i> All Task
+          <a class=" nav-link active " href=""> 
+            All Task
           </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="./examples/icons.html">
-              <i class="ni ni-planet text-blue"></i> Personal
+            <a class="nav-link " href="">Personal
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="./examples/maps.html">
-              <i class="ni ni-pin-3 text-orange"></i> Work
+            <a class="nav-link " href="">Work
             </a>
           </li>
         </ul>
         <!-- Divider -->
         <hr class="my-3">
         <!-- Heading -->
-      </div>
+        <a class="nav-link " href=""><i class="fas fa-plus"></i> add List
+            </a>
     </div>
   </nav>
   <div class="main-content">
@@ -177,11 +176,12 @@
     </nav>
     <!-- End Navbar -->
     <!-- Header -->
-    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
-    
-    </div>
-    <div class="container-fluid mt--7">
+    <div class="header bg-gradient-primary pb-5 pt-5 pt-md-5">
       
+    </div>
+    <div class="container-fluid mt-4">
+      <!-- Page content -->
+    <?= $this->fetch('content') ?>
       <!-- Footer -->
       <footer class="footer">
         <div class="row align-items-center justify-content-xl-between">
