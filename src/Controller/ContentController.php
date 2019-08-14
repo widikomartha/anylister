@@ -30,19 +30,24 @@ class ContentController extends AppController
 {
     public function initialize()
     {
+        $this->loadComponent('Auth');
+
         $this->viewBuilder()->setLayout('content-master');
+        $data = [
+            'userData' => $this->Auth
+        ];
+
+        $this->set($data);
+
+        $this->Auth->allow(['index', 'home']);
     }
     public function index()
     {
         
     }
-    public function dashboard()
+    public function home()
     {
-        $this->viewBuilder()->setLayout('dashboard-temp');
-    }
-    public function register()
-    {
-
+        $this->viewBuilder()->setLayout('home-temp');
     }
 
 }

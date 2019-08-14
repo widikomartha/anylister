@@ -7,13 +7,13 @@
               <div class="text-center text-muted mb-4">
                 Sign Up
               </div>
-              <form role="form">
+              <?= $this->Form->create($userRegisterForm, ['method' => 'post']) ?>
                 <div class="form-group">
                   <div class="input-group input-group-alternative mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Name" type="text">
+                    <?php echo $this->Form->text('', ['class' => 'form-control','name' => 'username','placeholder' => 'Name']); ?>
                   </div>
                 </div>
                 <div class="form-group">
@@ -21,7 +21,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Email" type="email">
+                    <?php echo $this->Form->email('', ['class' => 'form-control','name' => 'email','placeholder' => 'Email']); ?>
                   </div>
                 </div>
                 <div class="form-group">
@@ -29,7 +29,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Password" type="password">
+                    <?php echo $this->Form->password('', ['class' => 'form-control','name' => 'password','placeholder' => 'Password']); ?>
                   </div>
                 </div>
                 <div class="form-group">
@@ -37,7 +37,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Repeat Password" type="password">
+                    <?php echo $this->Form->password('', ['class' => 'form-control','name' => 'password','placeholder' => 'Repeat Password']); ?>
                   </div>
                 </div>
                 <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div>
@@ -52,9 +52,10 @@
                   </div>
                 </div>
                 <div class="text-center">
-                  <button type="button" class="btn btn-primary mt-4">Create account</button>
+                  <?php echo $this->Form->button('Create account',['class' => 'btn btn-primary mt-4','type' => 'submit']);?>
                 </div>
-              </form>
+                <p><?= $this->Flash->render() ?></p>
+              <?= $this->Form->end() ?>
             </div>
           </div>
           

@@ -18,6 +18,8 @@ use Cake\Core\Configure;
 use Cake\Http\Exception\ForbiddenException;
 use Cake\Http\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
+use App\Form\UserRegisterForm;
+use App\Form\UserLoginForm;
 
 /**
  * Static content controller
@@ -30,15 +32,86 @@ class LoginController extends AppController
 {
     public function initialize()
     {
+        parent::initialize();
+
+        $this->loadModel('Users');
+        $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            'authorize'=> 'Controller',
+            'authenticate' => [
+                'Form' => [
+                    'fields' => [
+                        'username' => 'email',
+                        'password' => 'password'
+                    ],
+                    'userModel' => 'Users'
+                ]
+            ],
+            'loginAction' => [
+                'controller' => 'Login',
+                'action' => 'signin'
+            ],
+             // If unauthorized, return them to page they were just on
+            'unauthorizedRedirect' => $this->referer()
+        ]);
+
+        // Allow the display action so our PagesController
+        // continues to work. Also enable the read only actions.
+        $this->Auth->allow(['register', 'signin', 'logout']);
         $this->viewBuilder()->setLayout('login');
+    }
+    public function isAuthorized($user)
+    {
+        // By default deny access.
+        return false;
     }
     public function signin()
     {
+        $userLoginForm = new UserLoginForm();
 
+        $this->set('userLoginForm', $userLoginForm);
+
+        if ($this->request->is('post')) {
+            $user = $this->Auth->identify();
+            $this->log($this->request->getData(), 'debug');
+            if ($user) {
+                $this->Auth->setUser($user);
+                return $this->redirect(
+                    ['controller' => 'Content', 'action' => 'index']
+                );
+            }
+            $this->Flash->error('Your email or password is incorrect.');
+        }
     }
     public function register()
     {
+        $userRegisterForm = new UserRegisterForm();
 
+        $this->set('userRegisterForm', $userRegisterForm);
+
+        if ($this->request->is('post')) {
+            if ($userRegisterForm->execute($this->request->getData())) {
+                $user = $this->Users->newEntity();
+                $user = $this->Users->patchEntity($user, $this->request->getData());
+
+                if ($this->Users->save($user)) {
+                    $this->Flash->set('Register success.');
+                    return $this->redirect(
+                        ['controller' => 'Login', 'action' => 'signin']
+                    );
+                }
+                else {
+                    $this->Flash->set('Register failed.');
+                }
+            }
+            else {
+                $this->Flash->set($userRegisterForm->error());
+            }
+        }
     }
-
+    public function logout()
+    {
+        $this->Flash->success('You are now logged out.');
+        return $this->redirect($this->Auth->logout());
+    }
 }

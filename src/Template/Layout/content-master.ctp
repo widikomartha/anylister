@@ -94,7 +94,7 @@
           </div>
         </form>
         <!-- Navigation -->
-        <h2 class="text"> MY LIST</h2>
+        <h2 class="text"><b>MY LIST</b></h2>
         <ul class="navbar-nav">
           <li class="nav-item">
           <a class=" nav-link active " href=""> 
@@ -152,7 +152,7 @@
                   <img alt="Image placeholder" src="./master-assets/img/theme/team-4-800x800.jpg">
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold">Jessica Jones</span>
+                  <span class="mb-0 text-sm  font-weight-bold"><?= $userData->user('username') ?></span>
                 </div>
               </div>
             </a>
@@ -165,10 +165,9 @@
                 <span>My profile</span>
               </a>
               <div class="dropdown-divider"></div>
-              <a href="#!" class="dropdown-item">
-                <i class="ni ni-user-run"></i>
-                <span>Logout</span>
-              </a>
+                <?= $this->Html->link('<i class="ni ni-user-run"></i> <span>Logout</span>',
+                    ['controller' => 'Login', 'action' => 'logout', '_full' => true], ['class' => 'dropdown-item', 'escape' => false]); ?>
+              <p><?= $this->Flash->render() ?></p>
             </div>
           </li>
         </ul>

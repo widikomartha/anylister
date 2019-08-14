@@ -67,7 +67,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
               <?= $this->Html->link('
                 <i class="ni ni-planet"></i>
                 <span class="nav-link-inner--text">Dashboard</span>',
-                    ['controller' => 'Content', 'action' => 'dashboard', '_full' => true], 
+                    ['controller' => 'Content', 'action' => 'home', '_full' => true], 
                     ['class' => 'nav-link nav-link-icon', 'escape' => false]); ?>
             </li>
             <li class="nav-item">
