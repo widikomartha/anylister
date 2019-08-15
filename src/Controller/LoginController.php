@@ -36,35 +36,17 @@ class LoginController extends AppController
 
         $this->loadModel('Users');
         $this->loadComponent('Flash');
-        $this->loadComponent('Auth', [
-            'authorize'=> 'Controller',
-            'authenticate' => [
-                'Form' => [
-                    'fields' => [
-                        'username' => 'email',
-                        'password' => 'password'
-                    ],
-                    'userModel' => 'Users'
-                ]
-            ],
-            'loginAction' => [
-                'controller' => 'Login',
-                'action' => 'signin'
-            ],
-             // If unauthorized, return them to page they were just on
-            'unauthorizedRedirect' => $this->referer()
-        ]);
 
         // Allow the display action so our PagesController
         // continues to work. Also enable the read only actions.
-        $this->Auth->allow(['register', 'signin', 'logout']);
+        $this->Auth->allow();
         $this->viewBuilder()->setLayout('login');
     }
-    public function isAuthorized($user)
-    {
-        // By default deny access.
-        return false;
-    }
+    // public function isAuthorized($user)
+    // {
+    //     // By default deny access.
+    //     return false;
+    // }
     public function signin()
     {
         $userLoginForm = new UserLoginForm();

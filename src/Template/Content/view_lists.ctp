@@ -1,4 +1,4 @@
-<h1 class="text-muted"><b> All Taks</b></h1>
+<h1 class="text-muted"><b><?= $category->name ?></b></h1>
 <div class="row">
     <div class="col-md">
         <div class="card shadow lg-320">

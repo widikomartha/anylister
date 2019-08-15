@@ -408,7 +408,6 @@ h6,
   font-family: inherit;
   font-weight: 600;
   line-height: 1.5;
-  color: #32325d;
 }
 
 h1,
@@ -594,9 +593,36 @@ pre code {
   word-break: normal;
 }
 
-.pre-scrollable {
-  max-height: 340px;
-  overflow-y: scroll;
+.pre-scrollable{
+  height: 100%;
+  overflow-y: auto;
+}
+/* dengan background transparent agar scroll bar tidak terlihat */
+.scroll-pane::-webkit-scrollbar {
+  width: 8px
+}
+.scroll-pane::-webkit-scrollbar-track {
+  background-color:transparent;
+  border-radius: 2px
+}
+.scroll-pane::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background-color: transparent;
+  transition: all 400ms ease-in-out
+}
+
+/* div di-hover dan scroll bar diberi background solid agar terlihat */
+.scroll-pane:hover::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, .1);
+  border-radius: 20px
+}
+.scroll-pane:hover::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, .4);
+  transition: 400ms ease-in-out
+}
+.scroll-pane:hover::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, .6)
 }
 
 .container {
@@ -6090,7 +6116,7 @@ button.close {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1050;
+  z-index: 99999;
   display: none;
   overflow: hidden;
   outline: 0;
@@ -16067,7 +16093,6 @@ textarea[resize="horizontal"] {
 }
 
 .input-group-alternative {
-  box-shadow: 0 1px 3px rgba(50, 50, 93, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02);
   border: 0;
   transition: box-shadow .15s ease;
 }
@@ -16275,7 +16300,6 @@ textarea[resize="horizontal"] {
 }
 
 .input-group-alternative {
-  box-shadow: 0 1px 3px rgba(50, 50, 93, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02);
   border: 0;
   transition: box-shadow .15s ease;
 }
@@ -20677,4 +20701,20 @@ pre>code.highlight {
 
 h2.text-list{
   padding-bottom: 1rem;
+}
+
+.form-control.form-control-alternative{
+  height: 30px;
+}
+
+.card.shadow.lg-320{
+  height: 320px;
+}
+
+.card .card-header:hover{
+  color:#03acca;
+  cursor:pointer;
+}
+.card .card-header:active{
+  color:#0f7688;
 }

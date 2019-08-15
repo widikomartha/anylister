@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>
-    Argon Dashboard - Free Dashboard for Bootstrap 4 by Creative Tim
+    <?= $pageTitle ?> - <?= $pageTagline ?>
   </title>
   <!-- Fonts -->
   <?= $this->Html->css('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700'); ?>  
@@ -16,7 +16,7 @@
   <?= $this->Html->css('/master-assets/css/argon-dashboard.css?v=1.1.0'); ?>    
 </head>
 
-<body class="">
+<body>
   <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
     <div class="container-fluid">
       <!-- Toggler -->
@@ -25,7 +25,7 @@
       </button>
       <!-- Brand -->
       <a class="navbar-brand pt-0" href="./index.html">
-        <img src="./master-assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+        <?= $this->Html->image('/master-assets/img/brand/blue.png', ['class' => 'navbar-brand-img']); ?>
       </a>
       <!-- User -->
       <ul class="nav align-items-center d-md-none">
@@ -71,7 +71,7 @@
           <div class="row">
             <div class="col-6 collapse-brand">
               <a href="./index.html">
-                <img src="./master-assets/img/brand/blue.png">
+              <?= $this->Html->image('/master-assets/img/brand/blue.png'); ?>
               </a>
             </div>
             <div class="col-6 collapse-close">
@@ -94,29 +94,29 @@
           </div>
         </form>
         <!-- Navigation -->
-        <h2 class="text"><b>MY LIST</b></h2>
-        <ul class="navbar-nav">
-          <li class="nav-item">
-          <a class=" nav-link active " href=""> 
-            All Task
-          </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="">Personal
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="">Work
-            </a>
-          </li>
-        </ul>
+        <?= $this->element('sidebar'); ?>
         <!-- Divider -->
         <hr class="my-3">
         <!-- Heading -->
-        <a class="nav-link " href=""><i class="fas fa-plus"></i> add List
-            </a>
+        <?= $this->Form->create($categoryAddForm, [
+          'method' => 'post', 
+          'url'    => [
+            'controller' => 'Content', 
+            'action' => 'addCategory'
+          ]]) ?>
+          <div class="form-group">
+            <div class="input-group input-group-alternative mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-plus"></i></span>
+              </div>
+              <?php echo $this->Form->text('', ['class' => 'form-control form-control-alternative','name' => 'name','placeholder' => 'add List']); ?>
+            </div>
+          </div>
+          <p><?= $this->Flash->render() ?></p>
+        <?= $this->Form->end() ?>
     </div>
   </nav>
+  
   <div class="main-content">
     <!-- Navbar -->
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
@@ -149,7 +149,7 @@
             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
-                  <img alt="Image placeholder" src="./master-assets/img/theme/team-4-800x800.jpg">
+                  <?= $this->Html->image('/master-assets/img/theme/team-4-800x800.jpg'); ?>
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
                   <span class="mb-0 text-sm  font-weight-bold"><?= $userData->user('username') ?></span>

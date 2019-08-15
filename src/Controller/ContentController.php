@@ -18,6 +18,7 @@ use Cake\Core\Configure;
 use Cake\Http\Exception\ForbiddenException;
 use Cake\Http\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
+use App\Form\CategoryAddForm;
 
 /**
  * Static content controller
@@ -30,24 +31,85 @@ class ContentController extends AppController
 {
     public function initialize()
     {
-        $this->loadComponent('Auth');
+        parent::initialize();
+
+        $this->loadModel('Categories');
 
         $this->viewBuilder()->setLayout('content-master');
         $data = [
-            'userData' => $this->Auth
+            'userData' => $this->Auth,
+            'pageTagline' => 'Free Dashboard for Bootstrap 4 by Creative Tim'
         ];
 
         $this->set($data);
 
-        $this->Auth->allow(['index', 'home']);
+        $this->Auth->allow(['home']);
+
+        $categoryAddForm = new CategoryAddForm();
+
+        $categories = $this->Categories->find('all')->contain('Users')->where(['Users.id' => $this->Auth->user('id')]);
+
+        $data = [
+            'pageTitle'   => 'Dashboard',
+            'pageTagline' => 'Welcome ' . ucwords($this->Auth->user('username')),
+            'categories'  => $categories,
+        ];
+
+        // $this->log($categories, 'debug');
+
+        $this->set($data);
+        $this->set('categoryAddForm', $categoryAddForm);
     }
+    // public function isAuthorized($user)
+    // {
+    //     // By default deny access.
+    //     return false;
+    // }
     public function index()
     {
         
+    }
+    public function profile()
+    {
+        $data = [
+            'pageTitle'   => 'Profile',
+            'pageTagline' => 'Edit'
+        ];
+
+        $this->set($data);
+    }
+    public function viewLists($id)
+    {
+        $category = $this->Categories->get($id);
+        $this->set('category', $category);
     }
     public function home()
     {
         $this->viewBuilder()->setLayout('home-temp');
     }
+    public function addCategory()
+    {
+        $categoryAddForm = new CategoryAddForm();
 
+        if ($this->request->is('post')) {
+            if ($categoryAddForm->execute($this->request->getData())) {
+                $category = $this->Categories->newEntity();
+                $category = $this->Categories->patchEntity($category, $this->request->getData());
+                $category->user_id = $this->Auth->user('id');
+
+                if ($this->Categories->save($category)) {
+                    $this->Flash->set('Add category success.');
+                    return $this->redirect(
+                        ['controller' => 'Content', 'action' => 'index']
+                    );
+                }
+                else {
+                    $this->Flash->set('Add category failed.');
+                }
+            }
+            else {
+                $this->Flash->set($categoryAddForm->error());
+            }
+        }
+    }
 }

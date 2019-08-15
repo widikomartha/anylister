@@ -66,6 +66,12 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/register', ['controller' => 'Login', 'action' => 'register']);
     $routes->connect('/logout', ['controller' => 'Login', 'action' => 'logout']);
     $routes->connect('/index', ['controller' => 'Content', 'action' => 'index']);
+    $routes->connect('/add-category', ['controller' => 'Content', 'action' => 'addCategory']);
+    $routes->connect('/category/:id', [
+        'controller' => 'Content', 
+        'action'     => 'viewLists'
+    ],  ['_name' => 'viewLists'])
+    ->setPass(['id']);
     $routes->connect('/', ['controller' => 'Content', 'action' => 'home']);
 
 
