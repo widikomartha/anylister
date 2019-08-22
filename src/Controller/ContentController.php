@@ -19,6 +19,7 @@ use Cake\Http\Exception\ForbiddenException;
 use Cake\Http\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
 use App\Form\CategoryAddForm;
+use App\Form\TaskAddForm;
 
 /**
  * Static content controller
@@ -34,6 +35,7 @@ class ContentController extends AppController
         parent::initialize();
 
         $this->loadModel('Categories');
+        $this->loadModel('Tasks');
 
         $this->viewBuilder()->setLayout('content-master');
         $data = [
@@ -46,6 +48,8 @@ class ContentController extends AppController
         $this->Auth->allow(['home']);
 
         $categoryAddForm = new CategoryAddForm();
+        $taskAddForm = new TaskAddForm();
+        $this->set('taskAddForm', $taskAddForm);
 
         $categories = $this->Categories->find('all')->contain('Users')->where(['Users.id' => $this->Auth->user('id')]);
 
@@ -67,7 +71,9 @@ class ContentController extends AppController
     // }
     public function index()
     {
-        
+        $categories = $this->Categories->find('list')->select(['id', 'name'])->toArray();
+        $this->set('selectCategories', $categories);        
+        $this->set('categoryName', 'All Tasks');        
     }
     public function profile()
     {
@@ -78,10 +84,13 @@ class ContentController extends AppController
 
         $this->set($data);
     }
-    public function viewLists($id)
+    public function viewCategories($id)
     {
         $category = $this->Categories->get($id);
         $this->set('category', $category);
+        $this->set('categoryName', $category->name);
+
+        
     }
     public function home()
     {
@@ -109,6 +118,33 @@ class ContentController extends AppController
             }
             else {
                 $this->Flash->set($categoryAddForm->error());
+            }
+        }
+    }
+
+    public function addTask()
+    {
+        $taskAddForm = new TaskAddForm();
+
+        if ($this->request->is('post')) {
+            if ($taskAddForm->execute($this->request->getData())) {
+                $task = $this->Tasks->newEntity();
+                $task = $this->Tasks->patchEntity($task, $this->request->getData());
+                $task->user_id = $this->Auth->user('id');
+                $task->category_id = $this->request->getData('category_id');
+
+                if ($this->Tasks->save($task)) {
+                    $this->Flash->set('Add Task List success.');
+                    return $this->redirect(
+                        ['controller' => 'Content', 'action' => 'index']
+                    );
+                }
+                else {
+                    $this->Flash->set('Add Task List failed.');
+                }
+            }
+            else {
+                $this->Flash->set($taskAddForm->error());
             }
         }
     }

@@ -69,9 +69,10 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/add-category', ['controller' => 'Content', 'action' => 'addCategory']);
     $routes->connect('/category/:id', [
         'controller' => 'Content', 
-        'action'     => 'viewLists'
-    ],  ['_name' => 'viewLists'])
+        'action'     => 'viewCategories'
+    ],  ['_name' => 'viewCategories'])
     ->setPass(['id']);
+    $routes->connect('/add-task', ['controller' => 'Content', 'action' => 'addTask']);
     $routes->connect('/', ['controller' => 'Content', 'action' => 'home']);
 
 

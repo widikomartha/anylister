@@ -94,7 +94,7 @@ body {
   line-height: 1.5;
   color: #525f7f;
   text-align: left;
-  background-color: #f8f9fe;
+  background-color: #e7e7e769;
 }
 
 [tabindex="-1"]:focus {
@@ -758,6 +758,7 @@ pre code {
   min-height: 1px;
   padding-right: 15px;
   padding-left: 15px;
+  padding-bottom: 15px;
 }
 
 .col {
@@ -2146,7 +2147,7 @@ textarea.form-control {
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin: 0.7rem 0rem;
 }
 
 .form-text {
@@ -6211,7 +6212,7 @@ button.close {
 .modal-body {
   position: relative;
   flex: 1 1 auto;
-  padding: 1.5rem;
+  padding: 0rem 2rem;
 }
 
 .modal-footer {
@@ -15842,7 +15843,6 @@ a.btn-icon-only {
 .dropdown-header {
   padding-left: 1rem;
   padding-right: 1rem;
-  color: #f6f9fc;
   font-size: .625rem;
   text-transform: uppercase;
   font-weight: 700;
@@ -15877,8 +15877,7 @@ a.btn-icon-only {
 }
 
 .footer {
-  background: #f7fafc;
-  padding: 2.5rem 0;
+  padding: 1.1rem 2.5rem;
 }
 
 .footer .col-footer .heading {
@@ -16093,6 +16092,7 @@ textarea[resize="horizontal"] {
 }
 
 .input-group-alternative {
+  box-shadow: 0 1px 3px rgba(50, 50, 93, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02);
   border: 0;
   transition: box-shadow .15s ease;
 }
@@ -16300,6 +16300,7 @@ textarea[resize="horizontal"] {
 }
 
 .input-group-alternative {
+  box-shadow: 0 1px 3px rgba(50, 50, 93, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02);
   border: 0;
   transition: box-shadow .15s ease;
 }
@@ -20717,4 +20718,19 @@ h2.text-list{
 }
 .card .card-header:active{
   color:#0f7688;
+}
+
+.input-group-alternative2 {
+  border: 0;
+  transition: box-shadow .15s ease;
+}
+
+.input-group-alternative2 .form-control,
+.input-group-alternative2 .input-group-text {
+  border: 0;
+  box-shadow: none;
+}
+
+.focused .input-group-alternative2 {
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08) !important;
 }

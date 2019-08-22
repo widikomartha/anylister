@@ -99,17 +99,17 @@
         <hr class="my-3">
         <!-- Heading -->
         <?= $this->Form->create($categoryAddForm, [
-          'method' => 'post', 
-          'url'    => [
+          'method'       => 'post', 
+          'url'          => [
             'controller' => 'Content', 
-            'action' => 'addCategory'
+            'action'     => 'addCategory'
           ]]) ?>
           <div class="form-group">
-            <div class="input-group input-group-alternative mb-4">
+            <div class="input-group input-group-alternative2 mb-4">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-plus"></i></span>
               </div>
-              <?php echo $this->Form->text('', ['class' => 'form-control form-control-alternative','name' => 'name','placeholder' => 'add List']); ?>
+              <?php echo $this->Form->text('', ['class' => 'form-control form-control-alternative','name' => 'name','placeholder' => 'add Category']); ?>
             </div>
           </div>
           <p><?= $this->Flash->render() ?></p>
@@ -117,7 +117,7 @@
     </div>
   </nav>
   
-  <div class="main-content">
+  <div class="main-content" >
     <!-- Navbar -->
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
       <div class="container-fluid">
@@ -178,20 +178,105 @@
     <div class="header bg-gradient-primary pb-5 pt-5 pt-md-5">
       
     </div>
-    <div class="container-fluid mt-4">
-      <!-- Page content -->
+    <!-- Page content -->
     <?= $this->fetch('content') ?>
-      <!-- Footer -->
-      <footer class="footer">
-        <div class="row align-items-center justify-content-xl-between">
-          <div class="col-xl-6">
-            <div class="copyright text-center text-xl-left text-muted">
-              &copy; 2019 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Any Lister</a>
+    
+    <?= $this->Form->create($taskAddForm, [
+          'method' => 'post', 
+          'url'    => [
+            'controller' => 'Content', 
+            'action' => 'addTask'
+          ]]) ?>
+    <div class="container-fluid" >
+      <button type="button" class="btn btn-block btn-primary mb-3" data-toggle="modal" data-target="#modal-default">
+          <i class="fas fa-plus"></i> New List
+      </button>
+      <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+        <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+          <div class="modal-content">
+              
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title-default">New List Form</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
             </div>
+            
+            <div class="modal-body">
+                <table>
+                    <tr>
+                        <td width="100px">List</td>
+                        <td>: </td>
+                        <td>
+                          <?php echo $this->Form->hidden('category_id', ['value' => $this->request->getParam('id')]) ?>
+                            <div class="input-group">
+                              <?php echo $this->Form->text('description', 
+                              ['class' => 'form-control',
+                              'placeholder' => 'Input list order']); ?>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50px">Date</td>
+                        <td>: </td>
+                        <td>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                    </div>
+                                     <?= $this->Form->text('selected_date', [
+                                        'class'       => 'form-control datepicker',
+                                        'data-date-format' => 'yyyy-mm-dd',
+                                        'placeholder' => 'Select date']); 
+                                    ?>
+                                </div>
+                            </div>    
+                            
+                        </td>
+                    </tr>
+                    <?php
+                      if ($this->getRequest()->getParam('action') != 'viewCategories'):
+                    ?>
+                    <tr>
+                        <td width="50px">Category</td>
+                        <td>: </td>
+                        <td>
+                          <?=
+                            $this->Form->select('category_id',
+                              $selectCategories,
+                              ['class'=>'form-control', 'empty' => 'Select category']
+                          );
+                          ?>
+                    </tr>
+                    <?php
+                      endif;
+                    ?>
+                </table>
+            </div>
+            
+            <div class="modal-footer">
+                <?php echo $this->Form->button('Save',['class' => 'btn btn-primary','type' => 'submit']);?>
+                <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button> 
+            </div>
+              
           </div>
         </div>
-      </footer>
+      </div>
     </div>
+    <p><?= $this->Flash->render() ?></p>
+        <?= $this->Form->end() ?>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="row align-items-center justify-content-xl-between">
+        <div class="col-xl-5">
+          <div class="copyright text-center text-xl-left text-muted">
+            &copy; 2019 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Any Lister</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
   </div>
   <!--   Core   -->
   <?= $this->Html->script('/master-assets/js/plugins/jquery/dist/jquery.min'); ?>  
@@ -199,9 +284,11 @@
   <!--   Optional JS   -->
   <?= $this->Html->script('/master-assets/js/plugins/chart.js/dist/Chart.min'); ?>  
   <?= $this->Html->script('/master-assets/js/plugins/chart.js/dist/Chart.extension'); ?>  
+  <?= $this->Html->script('/dashboard/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min'); ?>
   <!--   Argon JS   -->
   <?= $this->Html->script('/master-assets/js/argon-dashboard.min.js?v=1.1.0'); ?>  
   <?= $this->Html->script('https://cdn.trackjs.com/agent/v3/latest/t.js'); ?>  
+    
   <script>
     window.TrackJS &&
       TrackJS.install({

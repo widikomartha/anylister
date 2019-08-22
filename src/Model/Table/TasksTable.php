@@ -18,6 +18,7 @@ class TasksTable extends Table
         date_default_timezone_set("Asia/Makassar");
         if ($entity->isNew()) {
             $entity->created = date('Y-m-d H:m:s');
+            $entity->status  = '1';
         }
         else {
             $entity->modified = date('Y-m-d H:m:s');
